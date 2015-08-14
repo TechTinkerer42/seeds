@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Primitive Website Demo</title>
+    <meta name="description" content="">
+ 
+    <!-- build:css({.tmp/serve,src}) css/vendor.css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) css/index.css -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- endbuild -->
+      
+      
+  </head>
+  <body>
+      
+    <% title = "Primitive Website Demo"; %>
+      
+    <h1><div class="sprite-icon sprite-icon-attention"></div><%= title %></h1>
+
+    <!-- build:js(src) js/vendor.js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbuild -->
+      
+    <!-- build:js({.tmp/serve, src}) js/index.js -->
+    <script src="js/index/index.js"></script>
+    <!-- endbuild -->
+
+  </body>
+</html>

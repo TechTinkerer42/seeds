@@ -8,46 +8,40 @@ var $ = require('gulp-load-plugins')({
 
 module.exports = function(options) {
     
-  gulp.task('imagerev', ['html'], function(){
+  gulp.task('rev', ['html'], function(){
     var revFilter = $.filter(['**/*.{png,jpg,gif}', '**/*.css']);
-    var cssFilter = $.filter('**/*.css');
-    var imgFilter = $.filter('**/*.{png,jpg,gif}');
+    var htmlFilter = $.filter('*.html');
       
-    function renameCSS(path){
-      path.basename = path.basename.replace(/-[\da-f]{8,10}$/gi, '');
-    }
-
-    gulp.src(options.tmp + '/serve/**/*')
-      .pipe(revFilter)
+    gulp.src(options.tmp + '/.dist/**/*')
       .pipe($.rev())
+      .pipe(revFilter)
       .pipe($.revCssUrl())
       .pipe(revFilter.restore())
-      .pipe(imgFilter)
-      .pipe(gulp.dest(options.dist));
+      .pipe($.revReplace())
+      .pipe(htmlFilter)
+      .pipe($.rename(function(path){
+          path.basename = path.basename.replace(/-\w{8}$/gi, '');
+      }))
+      .pipe(htmlFilter.restore())
+      .pipe(gulp.dest(options.dist + '/'))
+      .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
 
   gulp.task('html', ['inject'], function () {
 
+    var imageStream = gulp.src(options.tmp + '/serve/image/**/*')
+        .pipe(gulp.dest(options.tmp + '/.dist/image/'));
     var htmlFilter = $.filter('*.html');
     var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
-    var imgFilter = $.filter('**/*.{png,jpg,gif}');
-    var revImgFilter = $.filter(['**/*.{png,jpg,gif}', '**/*.css']);
-    var assets;
-      
+    var assets = $.useref.assets({additionalStreams: imageStream});
+     
     return gulp.src(options.tmp + '/serve/*.html')
-      .pipe(assets = $.useref.assets())
-      .pipe(gulp.src(options.tmp + '/serve/image/*', {base: options.tmp + '/serve'}))
-      .pipe($.rev())
-      .pipe(revImgFilter)
-      .pipe($.revCssUrl())
-      .pipe(revImgFilter.restore())
+      .pipe(assets)
       .pipe(jsFilter)
       .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify'))
       .pipe(jsFilter.restore())
       .pipe(assets.restore())
       .pipe($.useref())
-      .pipe($.revReplace())
       .pipe(htmlFilter)
       .pipe($.minifyHtml({
         empty: true,
@@ -56,8 +50,7 @@ module.exports = function(options) {
         conditionals: true
       }))
       .pipe(htmlFilter.restore())
-      .pipe(gulp.dest(options.dist + '/'))
-      .pipe($.size({ title: options.dist + '/', showFiles: true }));
+      .pipe(gulp.dest(options.tmp + '/.dist/'));
   });
 
   gulp.task('fonts', function () {
@@ -71,5 +64,5 @@ module.exports = function(options) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('build', ['html', 'fonts', 'imagerev']);
+  gulp.task('build', ['html', 'rev', 'fonts']);
 };
