@@ -1,34 +1,54 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Primitive Website Demo</title>
-    <meta name="description" content="">
- 
-    <!-- build:css({.tmp/serve,src}) css/vendor.css -->
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-    <!-- endbuild -->
+<head>
+  <meta charset="utf-8">
+  <title>Index</title>
 
-    <!-- build:css({.tmp/serve,src}) css/index.css -->
-    <link rel="stylesheet" href="css/index.css">
-    <!-- endbuild -->
-      
-      
-  </head>
-  <body>
-      
-    <% title = "Primitive Website Demo"; %>
-      
-    <h1><div class="sprite-icon sprite-icon-attention"></div><%= title %></h1>
+  <!-- build:css css/vendor.css -->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+  <!-- endbuild -->
 
-    <!-- build:js(src) js/vendor.js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- endbuild -->
-      
-    <!-- build:js({.tmp/serve, src}) js/index.js -->
-    <script src="js/index/index.js"></script>
-    <!-- endbuild -->
+  <!-- build:css(tmp) css/index.css -->
+  <link rel="stylesheet" href="css/index.css">
+  <!-- endbuild -->
 
-  </body>
+
+</head>
+<body>
+
+<header class="container">
+  <ul class="nav nav-pills nav-justified">
+    <li role="presentation" class="active"><a href="index.html">首页</a></li>
+    <li role="presentation"><a href="detail.html">详细介绍</a></li>
+    <li role="presentation"><a href="about.html">关于我们</a></li>
+  </ul>
+</header>
+
+<div id="main">
+  <div class=" container">
+    <img src="image/html5-topper.png" alt="">
+  </div>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>HTML5</h1>
+      <p>Imagination, meet implementation. HTML5 is the cornerstone of the W3C's open web platform; a framework designed to support innovation and foster the full potential the web has to offer. Heralding this revolutionary collection of tools and standards, the HTML5 identity system provides the visual vocabulary to clearly classify and communicate our collective efforts.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="container">
+  <div>HTML5</div>
+</footer>
+
+<!-- build:js js/vendor.js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(tmp) js/index.js -->
+<script src="js/index.js"></script>
+<!-- endbuild -->
+
+
+</body>
 </html>
