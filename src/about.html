@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
 <head>
+  <% page = { title : 'About' , name : 'about' } %>
   <meta charset="utf-8">
-  <title>About</title>
+  <title><%= page.title %></title>
 
     <!-- build:css css/vendor.css -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
@@ -14,13 +15,7 @@
 </head>
 <body>
 
-<header class="container">
-  <ul class="nav nav-pills nav-justified">
-    <li role="presentation"><a href="index.html">首页</a></li>
-    <li role="presentation"><a href="detail.html">详细信息</a></li>
-    <li role="presentation" class="active"><a href="about.html">关于我们</a></li>
-  </ul>
-</header>
+<% include tpl/header.html %>
 
 <div id="main" class="container">
     <div class="jumbotron">
@@ -30,9 +25,7 @@
 </div>
 
 
-<footer class="container">
-  <div>HTML5</div>
-</footer>
+<% include tpl/footer.html %>
 
 
 </body>

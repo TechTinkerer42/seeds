@@ -15,6 +15,7 @@ module.exports = function() {
       .pipe(gulp.dest('tmp/dev/image/'));
 
     return gulp.src('src/*.html')
+      .pipe($.ejs())
       .pipe(assets)
       .pipe(assets.restore())
       .pipe($.useref())
@@ -25,7 +26,7 @@ module.exports = function() {
     gulp.watch('src/less/**/*.less', ['style', 'dev']);
     gulp.watch('src/image/*', ['image']);
     gulp.watch('src/js/**/*.js', ['script', 'dev']);
-    gulp.watch('src/*.html', ['dev']);
+    gulp.watch('src/**/*.html', ['dev']);
   });
 
   gulp.task('serve', ['style', 'dev'], function () {

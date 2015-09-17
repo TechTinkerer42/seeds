@@ -7,10 +7,11 @@ var $ = require('gulp-load-plugins')({
 
 module.exports = function(opts) {
 
-  gulp.task('html', ['style', 'image'], function () {
+  gulp.task('html', ['style', 'sprity', 'image'], function () {
     var assets = $.useref.assets();
 
     return gulp.src('src/*.html')
+      .pipe($.ejs())
       .pipe(assets)
       .pipe($.if('*.css', $.csso()))
       .pipe($.if('*.js', $.uglify()))
