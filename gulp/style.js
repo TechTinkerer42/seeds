@@ -16,7 +16,7 @@ module.exports = function(){
   });
 
   gulp.task('sprity', function(){
-    $.sprity.src({
+    return $.sprity.src({
       src: 'src/image/sprite/**/*.{png,jpg,gif}',
       name: 'sprite',
       style: './sprite.css',
@@ -24,15 +24,8 @@ module.exports = function(){
       prefix: 'sprite',
       split: true
     })
-    .pipe($.if('*.png', gulp.dest('tmp/dev/image/'), gulp.dest('tmp/css/')))
-    .pipe($.if('*.png', gulp.dest('dist/image/')));
-  });
-
-  gulp.task('image', function () {
-    gulp.src('src/image/*.{jpg,png,gif}')
-      .pipe($.rev())
-      .pipe(gulp.dest('dist/image/'))
-      .pipe(module.exports.imageManifest = $.rev.manifest());
+    .pipe($.if('*.png', gulp.dest('tmp/dev/image/')))
+    .pipe($.if('*.png', gulp.dest('tmp/image/'), gulp.dest('tmp/css/')));
   });
 
 };
