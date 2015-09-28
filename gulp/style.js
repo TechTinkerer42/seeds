@@ -24,9 +24,8 @@ module.exports = function(){
       prefix: 'sprite',
       split: true
     })
-    .pipe($.if('*.png', gulp.dest('tmp/dev/image/')))
-    .pipe($.if('*.png', gulp.dest('tmp/image/'), gulp.dest('tmp/css/')));
+    .pipe($.if('*.png', gulp.dest('tmp/image/'), gulp.dest('tmp/css/')))
+    .pipe($.if('*.png', gulp.dest('tmp/dev/image/')));
   });
 
 };
-

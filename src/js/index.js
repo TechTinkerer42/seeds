@@ -1,4 +1,5 @@
-//@import components/to-top.js;
+require('./components/to-top.js')();
+
 $(function(){
 
     var icons = $('#icons .sprite-icon'),

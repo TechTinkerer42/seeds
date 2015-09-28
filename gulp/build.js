@@ -9,7 +9,7 @@ module.exports = function() {
 
   var imageRevManifest;
 
-  gulp.task('html', ['style', 'sprity', 'build:image', 'script'], function () {
+  gulp.task('build:html', ['style', 'sprity', 'build:image', 'script'], function () {
     var assets = $.useref.assets();
 
     return gulp.src('src/*.html')
@@ -38,7 +38,7 @@ module.exports = function() {
   });
 
   gulp.task('build', function () {
-    gulp.start(['html']);
+    gulp.start(['build:html']);
   });
 
   gulp.task('serve:dist', ['build'], function () {

@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
 
 module.exports = function() {
 
-  gulp.task('dev', ['style', 'script'], function () {
+  gulp.task('serve:html', function () {
     var assets = $.useref.assets();
 
     gulp.src('src/image/*.{png,jpg,gif}')
@@ -22,21 +22,26 @@ module.exports = function() {
       .pipe(gulp.dest('tmp/dev'));
   });
 
-  gulp.task('watch', function () {
-    gulp.watch('src/image/sprite/**/*.{png, jpg, gif}', ['sprity']);
-    gulp.watch('src/less/**/*.less', ['style', 'dev']);
-    gulp.watch('src/js/**/*.js', ['script', 'dev']);
-    gulp.watch('src/**/*.html', ['dev']);
+  gulp.task('dev', ['sprity', 'style', 'script'], function () {
+      gulp.start('serve:html');
   });
 
-  gulp.task('serve', ['style', 'dev'], function () {
+  gulp.task('watch', function () {
+    gulp.watch('src/image/sprite/**/*.{png, jpg, gif}', ['sprity']);
+    gulp.watch('src/less/**/*.less', ['style']);
+    gulp.watch('src/js/**/*.js', ['script']);
+    gulp.watch('src/**/*.html', ['serve:html']);
+    gulp.watch(['tmp/css/**/*.css', 'tmp/js/**/*.js'], ['serve:html']);
+  });
+
+  gulp.task('serve', ['dev'], function () {
     $.browserSync.init({
       server: {
         baseDir: 'tmp/dev'
       },
       reloadDelay: 1000
     });
-    $.browserSync.watch('tmp/dev/**/*').on('change', function () {
+    $.browserSync.watch(['tmp/dev/**/*.html']).on('change', function () {
       $.browserSync.reload();
     });
     gulp.start(['watch']);

@@ -1,4 +1,4 @@
-//@import components/to-top.js;
+require('./components/to-top.js')();
 
 $(function(){
 
