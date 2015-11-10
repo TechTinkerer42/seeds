@@ -7,5 +7,4 @@ module.exports = function() {
                 scrollTop: 0
             });
         });
-    console.log('444');
 };

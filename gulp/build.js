@@ -13,6 +13,7 @@ module.exports = function() {
     var assets = $.useref.assets();
 
     return gulp.src('src/*.html')
+      .on('error', $.util.log.bind($.util, 'build:html error.'))
       .pipe($.ejs())
       .pipe(assets)
       .pipe($.if('*.css', $.csso()))
@@ -28,6 +29,7 @@ module.exports = function() {
   gulp.task('build:image', ['sprity', 'style'], function(){
     var imageFilter = $.filter('*.{jpg,png,gif}', {restore: true});
     gulp.src(['src/image/*.{jpg,png,gif}', 'tmp/image/*.{jpg,png,gif}', 'tmp/css/*.css'])
+      .on('error', $.util.log.bind($.util, 'build:image error.'))
       .pipe(imageFilter)
       .pipe($.rev())
       .pipe(gulp.dest('dist/image/'))

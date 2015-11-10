@@ -11,6 +11,7 @@ module.exports = function(){
 
   gulp.task('style', function(){
     return gulp.src('src/less/*.less')
+      .on('error', $.util.log.bind($.util, 'style error.'))
       .pipe($.less())
       .pipe(gulp.dest('tmp/css/'));
   });
@@ -24,6 +25,7 @@ module.exports = function(){
       prefix: 'sprite',
       split: true
     })
+    .on('error', $.util.log.bind($.util, 'sprity error.'))
     .pipe($.if('*.png', gulp.dest('tmp/image/'), gulp.dest('tmp/css/')))
     .pipe($.if('*.png', gulp.dest('tmp/dev/image/')));
   });
