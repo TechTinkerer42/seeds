@@ -1,0 +1,26 @@
+{
+  "name": "mobx-react-seed",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^0.14.52",
+    "@types/react-dom": "^0.14.19",
+    "@types/rx": "^2.5.34",
+    "mobx": "^2.7.0",
+    "mobx-react": "^4.0.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.2",
+    "typescript": "^2.0.10",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
