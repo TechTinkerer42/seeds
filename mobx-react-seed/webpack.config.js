@@ -1,9 +1,13 @@
+let autoprefixer = require("autoprefixer");
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let extractCSS = new ExtractTextPlugin("style.css");
+
 module.exports = {
     context: __dirname,
-    entry: "./src/index.tsx",
+    entry: "./app.js",
     output: {
         filename: "bundle.js",
-        path: __dirname + "/dist"
+        path: __dirname + "/build"
     },
 
     devtool: "source-map",
@@ -14,6 +18,7 @@ module.exports = {
 
     module: {
         loaders: [
+            { test: /\.less$/, loader: extractCSS.extract('css!csso!postcss!less') },
             { test: /\.tsx?$/, loader: "ts-loader" }
         ],
 
@@ -22,8 +27,30 @@ module.exports = {
         ]
     },
 
+    plugins: [
+        extractCSS
+    ],
+
     externals: {
         "react": "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
+        "react-router": "ReactRouter"
     },
+
+    devServer: {
+        proxy: {
+            '/api/*': {
+                target: {
+                    host: 'develop-server.in',
+                    protocol: 'http',
+                    port: 80
+                },
+                ignorePath: false,
+                changeOrigin: true,
+                secure: false
+            }
+        }
+    },
+
+    postcss: [ autoprefixer({ browsers: ['last 4 iOS versions', '> 1%'] }) ]
 };

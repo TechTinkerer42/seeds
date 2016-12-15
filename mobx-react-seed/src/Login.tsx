@@ -1,22 +1,24 @@
 import * as React from "react";
+import { browserHistory } from "react-router";
 import { observable, action, useStrict } from "mobx";
-import { observer } from "mobx-react";
-import { ERROR_USER_ACCOUNT, ERROR_USER_PASSWORD, OK, NULL } from "../classes/Const";
-import Message from "../classes/Message";
-import User from "../classes/User";
-import Header from "./Header"
+import { observer, inject } from "mobx-react";
+import { ERROR_USER_ACCOUNT, ERROR_USER_PASSWORD, OK, NULL } from "./classes/Const";
+import Message from "./classes/Message";
+import User from "./classes/User";
+import Header from "./components/Header";
 
 useStrict(true);
 
 interface LoginProps {
+    user: User
 };
 
 interface LoginState {
 };
 
-let user = new User();
+let user: User;
 
-@observer
+@inject("user") @observer
 export default class Login extends React.Component<LoginProps, LoginState> {
 
     @observable
@@ -33,6 +35,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
     constructor(props: any) {
         super(props);
+
+        user = this.props.user;
 
         this.loginInfo = {
             account: "",
@@ -67,7 +71,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             .then( (result) => {
                 user.account = this.loginInfo.account;
                 user.online = true;
-                alert("登录成功！")
+                browserHistory.replace("/");
             }, (errorMsg) => {
                 alert(errorMsg.text);
             });

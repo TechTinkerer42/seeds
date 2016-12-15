@@ -4,5 +4,6 @@ Thumbs.db
 .project
 node_modules/
 dist/
+build/
 docs/
 .vscode/

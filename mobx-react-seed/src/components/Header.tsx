@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router";
 import { observable, action, useStrict } from "mobx";
 import { observer } from "mobx-react";
 import User from "../classes/User";
@@ -14,7 +15,7 @@ interface HeaderState {
 
 
 @observer
-export default class Login extends React.Component<HeaderProps, HeaderState> {
+export default class Homepage extends React.Component<HeaderProps, HeaderState> {
 
     user: User
 
@@ -29,10 +30,14 @@ export default class Login extends React.Component<HeaderProps, HeaderState> {
 
         if ( this.user.online ) {
             nodeUserInfo = <span>用户名：{this.user.account} </span>
+        } else {
+            nodeUserInfo = <Link to="/login" >登录 </Link>
         }
 
         return (
             <header>
+                <Link to="/">Home</Link>
+                &nbsp;
                 { nodeUserInfo }
             </header>
         );

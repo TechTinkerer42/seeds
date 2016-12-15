@@ -4,22 +4,43 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/webpack-dev-server --inline --hot"
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./build/",
+    "build": "npm run clean && npm run copy && npm run webpack && npm run uglify",
+    "clean": "./node_modules/.bin/del-cli ./build/*",
+    "doc": "npm run rmdoc && npm run mkdoc",
+    "copy": "cp ./index.html ./node_modules/react/dist/react.min.js ./node_modules/react-dom/dist/react-dom.min.js ./node_modules/react-router/umd/ReactRouter.min.js ./build/",
+    "mkdoc": "./node_modules/.bin/jsdoc -c .jsdoc -d ./docs/",
+    "rmdoc": "./node_modules/.bin/del-cli ./docs",
+    "webpack": "./node_modules/.bin/webpack",
+    "uglify": "./node_modules/.bin/uglifyjs ./build/bundle.js -o ./build/bundle.js -c"
   },
   "license": "MIT",
   "dependencies": {
     "@types/react": "^0.14.52",
     "@types/react-dom": "^0.14.19",
-    "@types/rx": "^2.5.34",
+    "@types/react-router": "^2.0.41",
     "mobx": "^2.7.0",
     "mobx-react": "^4.0.3",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0"
   },
   "devDependencies": {
+    "css-loader": "^0.26.1",
+    "csso-loader": "^0.2.0",
+    "del-cli": "^0.2.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "jsdoc": "^3.4.3",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "postcss-loader": "^1.2.1",
     "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
     "ts-loader": "^1.2.2",
     "typescript": "^2.0.10",
+    "uglify-js": "^2.7.5",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }
