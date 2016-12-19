@@ -5,14 +5,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./build/",
-    "build": "npm run clean && npm run copy && npm run webpack && npm run uglify",
+    "build": "npm run clean && npm run webpack && npm run uglify",
     "clean": "./node_modules/.bin/del-cli ./build/*",
     "doc": "npm run rmdoc && npm run mkdoc",
-    "copy": "cp ./index.html ./node_modules/react/dist/react.min.js ./node_modules/react-dom/dist/react-dom.min.js ./node_modules/react-router/umd/ReactRouter.min.js ./build/",
     "mkdoc": "./node_modules/.bin/jsdoc -c .jsdoc -d ./docs/",
     "rmdoc": "./node_modules/.bin/del-cli ./docs",
     "webpack": "./node_modules/.bin/webpack",
-    "uglify": "./node_modules/.bin/uglifyjs ./build/bundle.js -o ./build/bundle.js -c"
+    "uglify": "npm run uglify-vendor && npm run uglify-main",
+    "uglify-vendor": "./node_modules/.bin/uglifyjs ./build/vendor.js -o ./build/vendor.js",
+    "uglify-main": "./node_modules/.bin/uglifyjs ./build/main.js -o ./build/main.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -41,6 +42,7 @@
     "ts-loader": "^1.2.2",
     "typescript": "^2.0.10",
     "uglify-js": "^2.7.5",
+    "uglify-loader": "^1.4.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }
