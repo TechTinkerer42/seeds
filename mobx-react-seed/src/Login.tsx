@@ -68,18 +68,19 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     login(evt: any) {
         evt.preventDefault();
         User.login(this.loginInfo.account, this.loginInfo.password)
-            .then( (result) => {
+            .then( (result: any) => {
                 user.account = this.loginInfo.account;
                 user.online = true;
                 browserHistory.replace("/");
-            }, (errorMsg) => {
+            }, (errorMsg: any) => {
                 alert(errorMsg.text);
             });
     }
 
     render() {
 
-        let nodeAccountError, nodePasswordError;
+        let nodeAccountError: any;
+        let nodePasswordError: any;
 
         if (this.errorInfo.accountError.code === OK) {
             nodeAccountError = <span>OK</span>;

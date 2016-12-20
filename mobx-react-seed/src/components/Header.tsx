@@ -26,7 +26,7 @@ export default class Homepage extends React.Component<HeaderProps, HeaderState> 
 
     render() {
 
-        let nodeUserInfo;
+        let nodeUserInfo: any;
 
         if ( this.user.online ) {
             nodeUserInfo = <span>用户名：{this.user.account} </span>

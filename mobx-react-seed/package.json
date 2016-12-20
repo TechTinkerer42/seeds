@@ -7,8 +7,8 @@
     "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./build/",
     "build": "npm run clean && npm run webpack && npm run uglify",
     "clean": "./node_modules/.bin/del-cli ./build/*",
-    "doc": "npm run rmdoc && npm run mkdoc",
-    "mkdoc": "./node_modules/.bin/jsdoc -c .jsdoc -d ./docs/",
+    "doc": "npm run rmdoc && npm run typedoc",
+    "typedoc": "./node_modules/.bin/typedoc --options typedoc.json ./src/",
     "rmdoc": "./node_modules/.bin/del-cli ./docs",
     "webpack": "./node_modules/.bin/webpack",
     "uglify": "npm run uglify-vendor && npm run uglify-main",
@@ -40,9 +40,9 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.2.2",
+    "typedoc": "^0.5.1",
     "typescript": "^2.0.10",
     "uglify-js": "^2.7.5",
-    "uglify-loader": "^1.4.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }

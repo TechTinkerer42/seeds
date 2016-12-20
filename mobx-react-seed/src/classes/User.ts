@@ -4,6 +4,14 @@ import Message from "./Message";
 
 useStrict(true);
 
+/**
+ * @module classes/User
+ */
+
+ /**
+  * 用户
+  */
+
 export default class User {
 
     @observable
@@ -89,8 +97,13 @@ export default class User {
         return msg;
     }
 
-    login (): Promise<Function> {
-        return new Promise( (resolve, reject) => {
+    /**
+     * 登录
+     * @function login
+     * @return {any} Promise
+     */
+    login () {
+        return new Promise( (resolve: any, reject: any) => {
             if ( !this._account ) {
                 reject( new Message( ERROR_USER_ACCOUNT , "缺少用户名") );
             } else if ( !this._password ) {
@@ -105,7 +118,7 @@ export default class User {
     }
 
     static login (account: string, password: string): Promise<Function> {
-        return new Promise( (resolve, reject) => {
+        return new Promise( (resolve: any, reject: any) => {
             if ( User.testAccountFormat(account).code !== OK ) {
                 reject( new Message( ERROR_USER_ACCOUNT , "用户名不符合规则") );
             } else if ( User.testPasswordFormat(password).code !== OK ) {
