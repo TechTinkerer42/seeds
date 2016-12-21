@@ -17,19 +17,16 @@ interface HeaderState {
 @observer
 export default class Homepage extends React.Component<HeaderProps, HeaderState> {
 
-    user: User
-
     constructor(props: any) {
         super(props);
-        this.user = this.props.user;
     }
 
     render() {
 
         let nodeUserInfo: any;
 
-        if ( this.user.online ) {
-            nodeUserInfo = <span>用户名：{this.user.account} </span>
+        if ( this.props.user.online ) {
+            nodeUserInfo = <span>用户名：{this.props.user.account}</span>
         } else {
             nodeUserInfo = <Link to="/login" >登录 </Link>
         }
@@ -37,7 +34,6 @@ export default class Homepage extends React.Component<HeaderProps, HeaderState> 
         return (
             <header>
                 <Link to="/">Home</Link>
-                &nbsp;
                 { nodeUserInfo }
             </header>
         );

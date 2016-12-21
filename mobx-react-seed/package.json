@@ -1,9 +1,10 @@
 {
   "name": "mobx-react-seed",
   "version": "0.0.1",
-  "description": "",
+  "description": "Mobx&React project seed",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "npm test -- ---watch",
     "start": "./node_modules/.bin/webpack-dev-server --inline --hot --content-base ./build/",
     "build": "npm run clean && npm run webpack && npm run uglify",
     "clean": "./node_modules/.bin/del-cli ./build/*",
@@ -27,16 +28,20 @@
     "react-router": "^3.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^16.0.1",
+    "@types/react-addons-test-utils": "^0.14.15",
     "css-loader": "^0.26.1",
     "csso-loader": "^0.2.0",
     "del-cli": "^0.2.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
+    "jest": "^18.0.0",
     "jsdoc": "^3.4.3",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "postcss-loader": "^1.2.1",
+    "react-addons-test-utils": "^15.4.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.2.2",
@@ -45,5 +50,16 @@
     "uglify-js": "^2.7.5",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/test.preprocessor.js"
+    },
+    "testRegex": ".*\\.spec\\.(ts|tsx|js)$"
   }
 }

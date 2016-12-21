@@ -13,7 +13,7 @@ module.exports = {
     },
     output: {
         filename: "[name].js?[hash]",
-        path: __dirname + "/build"
+        path: path.resolve(__dirname, "build")
     },
 
     devtool: "source-map",
@@ -24,10 +24,22 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.less$/, loader: extractCSS.extract("css!csso!postcss!less") },
-            { test: /\.tsx?$/, loader: "ts" },
-            { test: /\.html?$/, loader: "file?name=[name].html" },
-            { test: /\.(png|jpg|gif)?$/, loader: "file?name=assets/[name].[ext]?[hash]" }
+            { 
+                test: /\.less$/, 
+                loader: extractCSS.extract("css!csso!postcss!less") 
+            }, { 
+                test: /\.tsx?$/, 
+                exclude: [ 
+                    path.resolve(__dirname, "node_modules")
+                ], 
+                loader: "ts" 
+            }, { 
+                test: /\.html?$/, 
+                loader: "file?name=[name].html" 
+            }, { 
+                test: /\.(png|jpg|gif)?$/, 
+                loader: "file?name=assets/[name].[ext]?[hash]" 
+            }
         ],
 
         preLoaders: [

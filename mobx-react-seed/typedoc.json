@@ -1,6 +1,7 @@
 {
     "mode": "modules",
     "out": "docs",
+    "exclude": "**/*.spec.ts",
     "theme": "default",
     "ignoreCompilerErrors": "true",
     "experimentalDecorators": "true",
