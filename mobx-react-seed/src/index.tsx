@@ -3,8 +3,8 @@ import * as ReactDOM from "react-dom";
 import { Router, Route, browserHistory } from "react-router";
 import { Provider } from "mobx-react";
 import User from "./classes/User";
-import Homepage from "./Homepage";
-import Login from "./Login";
+import Homepage from "./pages/Homepage";
+import Login from "./pages/Login";
 
 let user = new User();
 

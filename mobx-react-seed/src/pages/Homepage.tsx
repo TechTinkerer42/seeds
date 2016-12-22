@@ -2,8 +2,8 @@ import * as React from "react";
 import { Link } from "react-router";
 import { observable, action, useStrict } from "mobx";
 import { observer, inject } from "mobx-react";
-import Header from "./components/Header";
-import User from "./classes/User";
+import Header from "../components/Header";
+import User from "../classes/User";
 
 useStrict(true);
 

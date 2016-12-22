@@ -2,10 +2,10 @@ import * as React from "react";
 import { browserHistory } from "react-router";
 import { observable, action, useStrict } from "mobx";
 import { observer, inject } from "mobx-react";
-import { ERROR_USER_ACCOUNT, ERROR_USER_PASSWORD, OK, NULL } from "./classes/Const";
-import Message from "./classes/Message";
-import User from "./classes/User";
-import Header from "./components/Header";
+import { ERROR_USER_ACCOUNT, ERROR_USER_PASSWORD, OK, NULL } from "../classes/Const";
+import Message from "../classes/Message";
+import User from "../classes/User";
+import Header from "../components/Header";
 
 useStrict(true);
 
