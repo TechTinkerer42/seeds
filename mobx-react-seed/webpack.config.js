@@ -3,7 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractCSS = new ExtractTextPlugin("style.css?[hash]");
+const extractCSS = new ExtractTextPlugin("style.css?[contentHash]");
 
 module.exports = {
     context: __dirname,
@@ -12,7 +12,7 @@ module.exports = {
         vendor: "./src/vendor.ts"
     },
     output: {
-        filename: "[name].js?[hash]",
+        filename: "[name].js",
         path: path.resolve(__dirname, "build")
     },
 
@@ -52,17 +52,21 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             names: ["vendor"]
         }),
-        function() {    //为html内引用的静态文件增加压缩前hash
+        function() {
             this.plugin("done", function(stats){
-                let assets = stats.toJson().assetsByChunkName,
+                let chunks = stats.toJson().chunks,
                     key, file;
                 file = fs.readFileSync(path.join(__dirname, "src", "index.html"), "utf8");
-                for (key in assets) {
-                    assets[key].forEach(function(name) {
-                        let oname = name.replace(/^([^?]+).*$/, "$1");
-                        file = file.replace(oname, name);
+                chunks.forEach(function(chunk) {
+                    chunk.files.forEach(function(filename){
+                        let names = /^([^?]+)\??(.*)$/.exec(filename);
+                        let name = filename;
+                        if (!names[2]) {    //无hash值,补上trunkHash
+                            name = `${names[1]}?${chunk.hash}`;
+                        }
+                        file = file.replace(names[1], name);
                     });
-                }
+                });
                 if (!fs.existsSync(path.join(__dirname, "build"))) {
                     fs.mkdirSync(path.join(__dirname, "build"));
                 }
