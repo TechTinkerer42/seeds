@@ -8,6 +8,7 @@ const extractCSS = new ExtractTextPlugin("style.css?[contentHash]");
 module.exports = {
     context: __dirname,
     entry: {
+        polyfills: "./src/polyfills.ts",
         main: "./src/app.ts",
         vendor: "./src/vendor.ts"
     },
@@ -32,7 +33,7 @@ module.exports = {
                 exclude: [ 
                     path.resolve(__dirname, "node_modules")
                 ], 
-                loader: "ts" 
+                loaders: ["awesome-typescript-loader", "angular2-template-loader"] 
             }, { 
                 test: /\.html?$/, 
                 loader: "file?name=[name].html" 
@@ -50,7 +51,7 @@ module.exports = {
     plugins: [
         extractCSS,
         new webpack.optimize.CommonsChunkPlugin({
-            names: ["app", "vendor"]
+            names: ["app", "vendor", "polyfills"]
         }),
         function() {
             this.plugin("done", function(stats){
@@ -61,7 +62,7 @@ module.exports = {
                     chunk.files.forEach(function(filename){
                         let names = /^([^?]+)\??(.*)$/.exec(filename);
                         let name = filename;
-                        if (!names[2]) {    //无hash值,补上trunkHash
+                        if (!names[2]) {
                             name = `${names[1]}?${chunk.hash}`;
                         }
                         file = file.replace(names[1], name);
