@@ -1,0 +1,68 @@
+{
+  "name": "redux-react-seed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "npm test -- ---watch",
+    "start": "npm run dev:mock",
+    "dev": "./node_modules/.bin/webpack-dev-server --env=dev --inline --hot --content-base ./src/",
+    "dev:mock": "./node_modules/.bin/webpack-dev-server --env=mock --inline --hot --content-base ./src/",
+    "build": "npm run clean && npm run webpack",
+    "clean": "./node_modules/.bin/del-cli ./build/*",
+    "doc": "npm run rmdoc && npm run typedoc",
+    "typedoc": "./node_modules/.bin/typedoc --options typedoc.json ./src/",
+    "rmdoc": "./node_modules/.bin/del-cli ./docs",
+    "webpack": "./node_modules/.bin/webpack --env=prod"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react": "^15.0.22",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-redux": "^4.4.39",
+    "@types/react-router": "^4.0.4",
+    "@types/react-router-dom": "^4.0.4",
+    "@types/react-router-redux": "^5.0.0",
+    "@types/react-test-renderer": "^15.4.5",
+    "@types/redux": "^3.6.0",
+    "@types/redux-logger": "^3.0.0",
+    "@types/redux-thunk": "^2.1.0",
+    "del-cli": "^0.2.1",
+    "file-loader": "^0.11.1",
+    "jest": "^19.0.2",
+    "mockjs": "^1.0.1-beta3",
+    "react-test-renderer": "^15.5.4",
+    "redux-logger": "^3.0.1",
+    "ts-loader": "^2.0.3",
+    "typedoc": "^0.5.10",
+    "typescript": "^2.2.2",
+    "uglify-js": "^2.8.22",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/test.preprocessor.js"
+    },
+    "testRegex": ".*\\.spec\\.(ts|tsx|js)$"
+  }
+}
