@@ -9,15 +9,7 @@ class Logout extends React.Component<any, any> {
 
     componentDidMount() {
         const { dispatch } = this.props
-        dispatch( fetchLogout( () => {
-            this.goHome()
-        }) )
-    }
-
-    goHome() {
-        this.props.history.replace( {
-            pathname: "/"
-        } )
+        dispatch( fetchLogout() )
     }
 
     render() {

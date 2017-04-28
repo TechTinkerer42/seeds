@@ -25,17 +25,9 @@ class Login extends React.Component<any, any> {
         })
     }
 
-    goHome() {
-        this.props.history.replace( {
-            pathname: "/"
-        } )
-    }
-
     login() {
         const { dispatch } = this.props
-        dispatch( fetchLogin( this.state.username, this.state.password, () => {
-            this.goHome()
-        } ) )
+        dispatch( fetchLogin( this.state.username, this.state.password ) )
     }
 
     render() {
