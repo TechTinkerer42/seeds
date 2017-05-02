@@ -25,7 +25,7 @@ class Header extends React.Component<any, any> {
 
 
 function select( state: any ) {
-	const { userinfo } = state.userInfo || {
+	const { userinfo } = state.get( "userInfo" ).toJS() || {
 		userinfo : {}
 	}
 	return {

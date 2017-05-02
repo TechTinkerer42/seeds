@@ -13,14 +13,13 @@ class Logout extends React.Component<any, any> {
     }
 
     render() {
-
         return <div />
     }
 }
 
 
 const mapStateToProps = ( state: any ) => {
-	const { userinfo } = state.userInfo || {
+	const { userinfo } = state.get( "userInfo" ).toJS() || {
 		userinfo : {}
 	}
 	return {

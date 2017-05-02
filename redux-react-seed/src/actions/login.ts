@@ -1,4 +1,4 @@
-import { replace, push } from 'react-router-redux'
+import { replace, push } from "react-router-redux"
 
 export const FETCH_LOGIN = "FETCH_LOGIN"
 export const REQUEST_LOGIN = "REQUEST_LOGIN"
@@ -30,9 +30,9 @@ export function receiveLogin( data: any ) {
 export function fetchLogin( username: string, password: string ) {
     return ( dispatch: any ) => {
         dispatch( requestLogin( username, password ) )
-        return fetch('/api/login', {
-                method: 'POST',
-                body: 'username=' + username + '&password=' + password
+        return fetch("/api/login", {
+                method: "POST",
+                body: "username=" + username + "&password=" + password
             })
             .then( ( response ) => {
                 return response.json() 
@@ -61,7 +61,7 @@ export function receiveLogout( data: any ) {
 export function fetchLogout() {
     return ( dispatch: any ) => {
         dispatch( requestLogout() )
-        return fetch('/api/logout', {
+        return fetch("/api/logout", {
             })
             .then( response => response.json() )
             .then( json => dispatch( receiveLogout( json ) ) )

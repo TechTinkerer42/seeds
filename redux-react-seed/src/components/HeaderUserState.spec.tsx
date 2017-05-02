@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactTestUtils from "react-dom/test-utils"
 import * as ReactTestRenderer from "react-test-renderer"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router"
 
 import HeaderUserState from "./HeaderUserState"
 
@@ -17,7 +17,7 @@ describe("components/Header", () => {
         }
         renderer.render(<HeaderUserState userinfo={userinfo} />)
         result = renderer.getRenderOutput();
-        expect(result.props.children[1]).toEqual(<NavLink to="/login" >登录</NavLink>)
+        expect(result.props.children[1]).toEqual(<Link to="/login" >登录</Link>)
     });
 
     it("has login", () => {

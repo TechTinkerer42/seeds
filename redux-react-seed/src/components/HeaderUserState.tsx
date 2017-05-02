@@ -1,6 +1,6 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router"
 
 interface HeaderUserProps {
 	userinfo: any
@@ -15,9 +15,9 @@ export default class HeaderUserState extends React.Component<HeaderUserProps, un
 	render(){
 		let loginButton
 		if( !this.props.userinfo.username ){
-			loginButton = <NavLink to="/login" >登录</NavLink>
+			loginButton = <Link to="/login" >登录</Link>
 		}else{
-			loginButton = <NavLink to="/logout" >注销</NavLink>
+			loginButton = <Link to="/logout" >注销</Link>
 		}
 		return (
 			<div>

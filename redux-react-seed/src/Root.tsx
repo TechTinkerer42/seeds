@@ -1,20 +1,21 @@
 import * as React from "react"
-import { createStore, combineReducers, applyMiddleware } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { Provider } from "react-redux"
 import thunkMiddleware from "redux-thunk"
 import logger from "redux-logger"
-import createHistory from "history/createHashHistory"
-import { Route } from "react-router"
-import { ConnectedRouter, routerReducer, routerMiddleware } from "react-router-redux"
+import { Router, Route, hashHistory } from "react-router"
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from "react-router-redux"
+import { Map } from "immutable"
+import { combineReducers } from "redux-immutable"
 
 import * as reducers from "./reducers/"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Logout from "./pages/Logout"
 
-const history = createHistory()
-const historyMiddleware = routerMiddleware( history )
+let initialState = Map()
 let createStoreWithMiddleware
+let historyMiddleware = routerMiddleware( hashHistory )
 
 if ( process.env.NODE_ENV === "production" ) {
     createStoreWithMiddleware= applyMiddleware(
@@ -32,20 +33,27 @@ if ( process.env.NODE_ENV === "production" ) {
 const store = createStoreWithMiddleware(
     combineReducers( Object.assign({}, reducers, {
         routing: routerReducer
-    }))
+    })), 
+    initialState
 )
+
+const history = syncHistoryWithStore( hashHistory, store, {
+    selectLocationState( state ) {
+        return state.get( "routing" );
+    }
+})
 
 export default class Root extends React.Component<any, any> {
     render() {
         return (
             <Provider store={ store } >
-                <ConnectedRouter history={ history } >
-                    <div className="container">
-                        <Route exact path="/" component={ Home } />
+                <div className="container">
+                    <Router  history={ history } >
+                        <Route path="/" component={ Home } />
                         <Route path="/login" component={ Login } />
                         <Route path="/logout" component={ Logout } />
-                    </div>
-                </ConnectedRouter>
+                    </Router >
+                </div>
             </Provider>
         )
     }
