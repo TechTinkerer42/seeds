@@ -22,11 +22,7 @@ class Home extends React.Component<any, any> {
 }
 
 const mapStateToProps = ( state: any ) => {
- 	const { userinfo } = state.get( "userInfo" ).toJS() || {
-		userinfo : {}
-	}
 	return {
-		userinfo
 	}
 
 }

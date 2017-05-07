@@ -8,20 +8,19 @@ import {
 
 export function userInfo( state = fromJS({
     "isFetching": false,
-    "userinfo": Map()
+    "username": null
 }), action: any ){
 	switch ( action.type ) {
     case REQUEST_LOGIN:
         return state.set( "isFetching", true )
-            .set( "userinfo", Map() )
     case RECEIVE_LOGIN:
         return state.set( "isFetching", false )
-            .set( "userinfo", fromJS( action.userinfo ) )
+            .set( "username", action.userinfo.username )
     case REQUEST_LOGOUT:
         return state.set( "isFetching", true )
     case RECEIVE_LOGOUT:
         return state.set( "isFetching", false )
-            .set( "userinfo", Map() )
+            .set( "username", null )
     default:
         return state
     }

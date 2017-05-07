@@ -20,7 +20,7 @@ export function receiveLogin( data: any ) {
         type: RECEIVE_LOGIN
     }
     if ( data.code === "0000" ) {
-        resData.userinfo = data.result.userinfo
+        resData.userinfo = data.result
     } else {
         resData.userinfo = {}
     }
@@ -53,8 +53,7 @@ export function requestLogout(){
 
 export function receiveLogout( data: any ) {
     return {
-        type: RECEIVE_LOGOUT,
-        userinfo : {}
+        type: RECEIVE_LOGOUT
     }
 }
 

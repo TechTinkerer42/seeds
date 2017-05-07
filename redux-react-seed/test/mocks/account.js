@@ -8,10 +8,8 @@ mock("/api/login", ( request ) => {
         code: "0000",
         message: "ok",
         result: {
-            userinfo: {
-                id: Random.increment(),
-                username: request.body.username
-            }
+            id: Random.increment(),
+            username: request.body.username
         }
     }
 

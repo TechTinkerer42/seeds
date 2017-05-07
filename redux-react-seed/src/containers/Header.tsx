@@ -1,10 +1,18 @@
 import * as React from "react"
 import { connect } from "react-redux"
+import { is } from "immutable"
 import HeaderUserState from "../components/HeaderUserState"
 
 class Header extends React.Component<any, any> {
     constructor ( props: any ) {
         super( props )
+    }
+
+    shouldComponentUpdate( nextProps: any, nextState: any) {
+        if ( !is( this.props.userinfo.get( "username" ), nextProps.userinfo.get( "username" ) ) ) {
+            return true;
+        }
+        return false
     }
 
     render() {
@@ -24,14 +32,11 @@ class Header extends React.Component<any, any> {
 }
 
 
-function select( state: any ) {
-	const { userinfo } = state.get( "userInfo" ).toJS() || {
-		userinfo : {}
-	}
+const mapStateToProps = ( state: any ) => {
 	return {
-		userinfo
+		userinfo: state.get( "userInfo" )
 	}
 
 }
 
-export default connect( select )( Header )
+export default connect( mapStateToProps )( Header )
