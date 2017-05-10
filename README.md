@@ -1,5 +1,5 @@
 # seeds
-项目种子。
+React，AngularJS项目种子。
 
 
 
