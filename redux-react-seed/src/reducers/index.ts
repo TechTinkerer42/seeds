@@ -1,2 +1,2 @@
-export { userInfo } from "./userInfo"
+export { user } from "./user"
 export { router } from "./router"

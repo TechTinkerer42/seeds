@@ -1,4 +1,4 @@
-import { fromJS, Map } from "Immutable"
+import { fromJS, Map } from "immutable"
 import {
     REQUEST_LOGIN,
     RECEIVE_LOGIN,
@@ -6,21 +6,22 @@ import {
     RECEIVE_LOGOUT
 } from "../actions/login"
 
-export function userInfo( state = fromJS({
+export function user( state = fromJS({
     "isFetching": false,
-    "username": null
+    "userInfo": Map()
 }), action: any ){
 	switch ( action.type ) {
     case REQUEST_LOGIN:
         return state.set( "isFetching", true )
+            .set( "userInfo", Map() )
     case RECEIVE_LOGIN:
         return state.set( "isFetching", false )
-            .set( "username", action.userinfo.username )
+            .set( "userInfo", fromJS( action.payload ) )
     case REQUEST_LOGOUT:
         return state.set( "isFetching", true )
     case RECEIVE_LOGOUT:
         return state.set( "isFetching", false )
-            .set( "username", null )
+            .set( "userInfo", Map() )
     default:
         return state
     }

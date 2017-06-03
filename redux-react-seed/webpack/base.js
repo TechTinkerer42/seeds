@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
-const webpack = require("webpack");
+const fs = require("fs")
+const path = require("path")
+const webpack = require("webpack")
 
 module.exports = {
     context: path.join(__dirname, "/../" ),

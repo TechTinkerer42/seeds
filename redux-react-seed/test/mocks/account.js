@@ -5,17 +5,17 @@ import mock from '../mock'
 mock("/api/login", ( request ) => {
 
     let responseData = {
-        code: "0000",
+        code: 0,
         message: "ok",
         result: {
             id: Random.increment(),
-            username: request.body.username
+            userName: request.body.userName
         }
     }
 
     if ( request.body.password.toString() === "123" ) {
         responseData = {
-            code: "0004",
+            code: 10001,
             message: "密码不正确"
         }
     }
@@ -24,7 +24,7 @@ mock("/api/login", ( request ) => {
 })
 
 mock("/api/logout", {
-    code: "0000",
+    code: 0,
     message: "ok",
     result: {
     }

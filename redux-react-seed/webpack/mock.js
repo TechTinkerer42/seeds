@@ -1,5 +1,5 @@
-const webpack = require("webpack");
-const baseConfig = require("./base");
+const webpack = require("webpack")
+const baseConfig = require("./base")
 
 module.exports = Object.assign( baseConfig, {
     plugins: baseConfig.plugins.concat([
@@ -8,5 +8,6 @@ module.exports = Object.assign( baseConfig, {
         })
     ]),
     devServer: {
+        port: 8081
     }
 });

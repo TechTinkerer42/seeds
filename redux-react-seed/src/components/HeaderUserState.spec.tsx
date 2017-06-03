@@ -9,23 +9,23 @@ let renderer = ReactTestUtils.createRenderer();
 
 describe("components/Header", () => {
 
-    let userinfo: any
+    let userInfo: any
     let result: any
 
     it("not login", () => {
-        userinfo = {
+        userInfo = {
         }
-        renderer.render(<HeaderUserState userinfo={userinfo} />)
+        renderer.render(<HeaderUserState />)
         result = renderer.getRenderOutput();
         expect(result.props.children[1]).toEqual(<Link to="/login" >登录</Link>)
     });
 
     it("has login", () => {
-        userinfo = {
-            username: "abc"
+        userInfo = {
+            userName: "abc"
         }
-        renderer.render(<HeaderUserState userinfo={userinfo} />)
+        renderer.render(<HeaderUserState />)
         result = renderer.getRenderOutput()
-        expect(result.props.children[0]).toEqual(<span>{ "欢迎，" + userinfo.username }</span>)
+        expect(result.props.children[0]).toEqual(<span>{ "欢迎，" + userInfo.userName }</span>)
     })
 })

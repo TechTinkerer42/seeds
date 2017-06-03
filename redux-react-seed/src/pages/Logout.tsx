@@ -18,14 +18,10 @@ class Logout extends React.Component<any, any> {
 }
 
 
-const mapStateToProps = ( state: any ) => {
-	const { userinfo } = state.get( "userInfo" ).toJS() || {
-		userinfo : {}
-	}
-	return {
-		userinfo
-	}
-
+const mapStateToProps = ( state: any, ownProps: any ) => {
+    return Object.assign({
+        userInfo: state.get("user").get("userInfo")
+    })
 }
 
 export default connect<any, any, any>( mapStateToProps )( Logout )

@@ -1,69 +1,68 @@
 import { replace, push } from "react-router-redux"
 
-export const FETCH_LOGIN = "FETCH_LOGIN"
 export const REQUEST_LOGIN = "REQUEST_LOGIN"
 export const RECEIVE_LOGIN = "RECEIVE_LOGIN"
-export const FETCH_LOGOUT = "FETCH_LOGOUT"
 export const REQUEST_LOGOUT = "REQUEST_LOGOUT"
 export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT"
 
-export function requestLogin( username: string, password: string ){
-	return {
-		type: REQUEST_LOGIN,
-		username,
-		password
-	}
+export function requestLogin(userName: string, password: string) {
+    return {
+        type: REQUEST_LOGIN,
+        payload: {
+            userName
+        }
+    }
 }
 
-export function receiveLogin( data: any ) {
+export function receiveLogin(data: any) {
     let resData: any = {
-        type: RECEIVE_LOGIN
+        type: RECEIVE_LOGIN,
+        payload: {}
     }
-    if ( data.code === "0000" ) {
-        resData.userinfo = data.result
-    } else {
-        resData.userinfo = {}
+    if (data.code === 0) {
+        resData.payload = data.result
     }
     return resData
 }
 
-export function fetchLogin( username: string, password: string ) {
-    return ( dispatch: any ) => {
-        dispatch( requestLogin( username, password ) )
+export function fetchLogin(userName: string, password: string) {
+    return (dispatch: any) => {
+        dispatch(requestLogin(userName, password))
         return fetch("/api/login", {
-                method: "POST",
-                body: "username=" + username + "&password=" + password
+            method: "POST",
+            body: "userName=" + userName + "&password=" + password
+        })
+            .then((response) => {
+                return response.json()
             })
-            .then( ( response ) => {
-                return response.json() 
+            .then((json) => {
+                return dispatch(receiveLogin(json))
             })
-            .then( ( json ) => {
-                return dispatch( receiveLogin( json ) ) 
-            })
-           	.then( json => dispatch( replace( "/" ) ) )
+            .then(json => dispatch(replace("/")))
     }
 }
 
 
-export function requestLogout(){
-	return {
-		type: REQUEST_LOGOUT
-	}
+export function requestLogout() {
+    return {
+        type: REQUEST_LOGOUT
+    }
 }
 
-export function receiveLogout( data: any ) {
+export function receiveLogout(data: any) {
     return {
-        type: RECEIVE_LOGOUT
+        type: RECEIVE_LOGOUT,
+        payload: {}
     }
 }
 
 export function fetchLogout() {
-    return ( dispatch: any ) => {
-        dispatch( requestLogout() )
+    return (dispatch: any) => {
+        dispatch(requestLogout())
         return fetch("/api/logout", {
-            })
-            .then( response => response.json() )
-            .then( json => dispatch( receiveLogout( json ) ) )
-           	.then( json => dispatch( replace( "/" ) ) )
+        })
+            .then(response => response.json())
+            .then(json => dispatch(receiveLogout(json)))
+            .then(json => dispatch(replace("/login")))
     }
 }
