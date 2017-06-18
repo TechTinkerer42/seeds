@@ -1,6 +1,8 @@
 const fs = require("fs")
 const path = require("path")
 const webpack = require("webpack")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const extractCSS = new ExtractTextPlugin("app.css")
 
 module.exports = {
     context: path.join(__dirname, "/../" ),
@@ -20,6 +22,9 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.less$/,
+                loader: extractCSS.extract("css-loader!less-loader") 
+            }, {
                 test: /\.tsx?$/, 
                 exclude: [ 
                     path.resolve(__dirname, "node_modules")
@@ -36,6 +41,7 @@ module.exports = {
     },
 
     plugins: [
+        extractCSS,
         new webpack.optimize.CommonsChunkPlugin({
             names: ["app", "vendor"]
         })

@@ -17,9 +17,9 @@ class HeaderUserState extends React.Component<HeaderUserProps, undefined> {
 		let loginButton
 		let userName = userInfo.get("userName")
 		if( !userName ){
-			loginButton = <Link to="/login" >登录</Link>
+			loginButton = <Link to="/Login" >登录</Link>
 		}else{
-			loginButton = <Link to="/logout" >注销</Link>
+			loginButton = <Link to="/Logout" >注销</Link>
 		}
 		return (
 			<div>

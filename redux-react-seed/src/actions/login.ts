@@ -63,6 +63,6 @@ export function fetchLogout() {
         })
             .then(response => response.json())
             .then(json => dispatch(receiveLogout(json)))
-            .then(json => dispatch(replace("/login")))
+            .then(json => dispatch(replace("/Login")))
     }
 }

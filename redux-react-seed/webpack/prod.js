@@ -1,6 +1,8 @@
 const fs = require("fs")
 const path = require("path")
 const webpack = require("webpack")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const extractCSS = new ExtractTextPlugin("app.[contentHash:20].css")
 const baseConfig = require("./base")
 
 module.exports = Object.assign( baseConfig, {
@@ -12,6 +14,9 @@ module.exports = Object.assign( baseConfig, {
     module: {
         loaders: [
             {
+                test: /\.less$/,
+                loader: extractCSS.extract( "css-loader!csso-loader!less-loader" ) 
+            }, {
                 test: /\.tsx?$/, 
                 exclude: [ 
                     path.resolve(__dirname, "node_modules")
@@ -26,7 +31,11 @@ module.exports = Object.assign( baseConfig, {
             }
         ]
     },
-    plugins: baseConfig.plugins.concat([
+    plugins: [
+        extractCSS,
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ["app", "vendor"]
+        }),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify( "production" )
         }),
@@ -38,7 +47,7 @@ module.exports = Object.assign( baseConfig, {
                 let assets = stats.toJson().assets
                 let key
                 let file
-                file = fs.readFileSync( path.join("./src", "index.html" ), "utf8")
+                file = fs.readFileSync( path.join("./src", "index.html" ), "utf-8")
                 assets.forEach( (asset) => {
                     let filename = asset.name
                     let arrNames = /^(.+)\.([^.]+)\.([^.]+)$/i.exec( filename )
@@ -50,8 +59,8 @@ module.exports = Object.assign( baseConfig, {
                 if ( !fs.existsSync( "./build" )) {
                     fs.mkdirSync( "./build" )
                 }
-                fs.writeFileSync( "./build/index.html", file, "utf8" );
+                fs.writeFileSync(path.join("./build", "index.html"), file, "utf8")
             })
         }
-    ])
+    ]
 })
